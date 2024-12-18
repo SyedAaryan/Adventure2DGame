@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.JPanel;
@@ -34,8 +35,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
-
+    public SuperObject[] obj = new SuperObject[10];
 
     public GamePanel() {
 
@@ -44,6 +46,12 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+    }
+
+    public void setUpGame() {
+
+        aSetter.setObject();
 
     }
 
@@ -104,8 +112,17 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        //THE TILES
         tileM.draw(g2);
 
+        //THE OBJECTS
+        for (SuperObject superObject : obj) {
+            if (superObject != null) {
+                superObject.draw(g2, this);
+            }
+        }
+
+        //THE PLAYER
         player.draw(g2);
 
         g2.dispose();
