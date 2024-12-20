@@ -121,13 +121,17 @@ public class Player extends Entity {
                 hasKey++;
                 gp.obj[i] = null;
                 System.out.println("Keys " + hasKey);
-            }
-            else if (objectName.equals("Door")){
-                if (hasKey > 0){
+            } else if (objectName.equals("Door")) {
+                if (hasKey > 0) {
                     gp.obj[i] = null;
                     hasKey--;
                 }
                 System.out.println("Key" + hasKey);
+            } else if (objectName.equals("Boots")) {
+
+                speed += 2;
+                gp.obj[i] = null;
+
             }
 
         }
