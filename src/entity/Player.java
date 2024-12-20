@@ -118,21 +118,34 @@ public class Player extends Entity {
             String objectName = gp.obj[i].name;
 
             if (objectName.equals("Key")) {
+
                 gp.playSE(1);
                 hasKey++;
                 gp.obj[i] = null;
-                System.out.println("Keys " + hasKey);
+                gp.ui.showMessage("You got a Key !");
+
+
             } else if (objectName.equals("Door")) {
+
                 if (hasKey > 0) {
+
                     gp.playSE(3);
                     gp.obj[i] = null;
                     hasKey--;
+                    gp.ui.showMessage("You opened a Door !");
+
+                } else {
+
+                    gp.ui.showMessage("You Need a Key !");
+
                 }
-                System.out.println("Key" + hasKey);
+
             } else if (objectName.equals("Boots")) {
+
                 gp.playSE(2);
                 speed += 2;
                 gp.obj[i] = null;
+                gp.ui.showMessage("Speed Up !");
 
             }
 
